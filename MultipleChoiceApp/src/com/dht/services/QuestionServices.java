@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -87,5 +88,54 @@ public class QuestionServices {
         }
         
         return false;
+    }
+    
+    public static boolean deleteQuestion(String questionId) throws SQLException {
+        Connection conn = Utils.getConn();
+        String sql = "DELETE FROM question WHERE id=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, questionId);
+        
+        int kq = stm.executeUpdate();
+        
+        return kq > 0;
+    }
+    
+    public static Question getQuestionById(String questionId) throws SQLException {
+        Connection conn = Utils.getConn();
+        String sql = "SELECT * FROM question WHERE id=?";
+        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, questionId);
+        
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            return new Question(rs.getString("id"), 
+                    rs.getString("content"));
+        }
+        
+        return null;
+    }
+    
+    public static List<Choice> getChoicesByQuestionId(String questionId) throws SQLException {
+        Connection conn = Utils.getConn();
+        String sql = "SELECT * FROM choice WHERE question_id=?";
+        
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, questionId);
+        ResultSet rs = stm.executeQuery();
+        
+        List<Choice> choices = new ArrayList<>();
+        while (rs.next()) {
+            String id = rs.getString("id");
+            String content = rs.getString("content");
+            boolean correct = rs.getBoolean("is_correct");
+            
+            Choice c = new Choice(id, content, correct);
+            choices.add(c);
+        }
+        
+        
+        return choices;
     }
 }

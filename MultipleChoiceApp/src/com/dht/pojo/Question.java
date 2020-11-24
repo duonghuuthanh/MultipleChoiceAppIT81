@@ -13,6 +13,11 @@ public class Question {
     private String id;
     private String content;
     private Category category;
+    
+    public Question(String id, String content) {
+        this.id = id;
+        this.content = content;
+    }
 
     public Question(String id, String content, Category category) {
         this.id = id;

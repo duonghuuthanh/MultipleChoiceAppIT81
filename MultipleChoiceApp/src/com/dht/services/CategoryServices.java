@@ -7,6 +7,7 @@ package com.dht.services;
 
 import com.dht.pojo.Category;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,19 @@ import java.util.List;
  * @author Admin
  */
 public class CategoryServices {
+    public static Category getCategoryById(int id) throws SQLException {
+        Connection conn = Utils.getConn();
+        String q = "SELECT * FROM category WHERE id=?";
+        PreparedStatement stm = conn.prepareStatement(q);
+        stm.setInt(1, id);
+        ResultSet rs = stm.executeQuery();
+        
+        while (rs.next())
+            return new Category(rs.getInt("id"), rs.getString("name"));
+        
+        return null;
+    }
+    
     public static List<Category> getCategories() throws SQLException {
         Connection conn = Utils.getConn();
         Statement stm = conn.createStatement();
