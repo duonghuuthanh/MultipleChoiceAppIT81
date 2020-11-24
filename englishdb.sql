@@ -53,7 +53,7 @@ CREATE TABLE `choice` (
   `is_correct` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_choice_question_idx` (`question_id`),
-  CONSTRAINT `fk_choice_question` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_choice_question` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,7 +63,7 @@ CREATE TABLE `choice` (
 
 LOCK TABLES `choice` WRITE;
 /*!40000 ALTER TABLE `choice` DISABLE KEYS */;
-INSERT INTO `choice` VALUES ('28b1d6e0-3fdf-4d65-98c9-84678b2dd47c','mine','57fa1066-85b2-403c-88cf-6005d22c0107','\0'),('7cc012e6-b425-4d7b-aa01-90ddc858f570','my','57fa1066-85b2-403c-88cf-6005d22c0107',''),('d0ea0722-0647-4b6c-8db6-111ab2f162fc','me','57fa1066-85b2-403c-88cf-6005d22c0107','\0'),('e4cc37d1-13ff-4a62-9b8f-7fe0d56365ce','myself','57fa1066-85b2-403c-88cf-6005d22c0107','\0');
+INSERT INTO `choice` VALUES ('2094035e-7ac5-4750-9f59-f9fea26e4932','a5','67eda21b-10a4-4a4a-900d-3691cfefa646',''),('316246ec-8837-40be-b1db-c633c352d2f6','a3','67eda21b-10a4-4a4a-900d-3691cfefa646',''),('50079480-8912-498c-af13-8f1e88ad7c04','a2','67eda21b-10a4-4a4a-900d-3691cfefa646','\0'),('7423e824-fb14-4773-9382-62114749b2aa','a1','67eda21b-10a4-4a4a-900d-3691cfefa646','\0');
 /*!40000 ALTER TABLE `choice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('57fa1066-85b2-403c-88cf-6005d22c0107','this is ... book',4);
+INSERT INTO `question` VALUES ('67eda21b-10a4-4a4a-900d-3691cfefa646','vbbgfdgdsgdsg',3);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-10 15:04:43
+-- Dump completed on 2020-11-24 14:48:40
